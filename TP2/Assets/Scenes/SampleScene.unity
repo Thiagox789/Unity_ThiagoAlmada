@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 50775095}
   - component: {fileID: 50775094}
   m_Layer: 5
-  m_Name: Boton_Posicionarese (1)
+  m_Name: Boton_Posicionarese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 50775095}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 639193866}
+        m_TargetAssemblyTypeName: ControladorUI, Assembly-CSharp
+        m_MethodName: BotonPosicionarse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &50775095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,8 +360,8 @@ Transform:
   m_GameObject: {fileID: 135887611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.25, y: 1, z: -4.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.25, y: 0.4, z: -4.25}
+  m_LocalScale: {x: 1, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -363,6 +375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 241084633}
+  - component: {fileID: 241084634}
   m_Layer: 0
   m_Name: ControladorPosta
   m_TagString: Untagged
@@ -385,6 +398,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &241084634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241084632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6e1b40f3d6f77d38b09d8a857cd949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControladorPosta
+  objetivos:
+  - {fileID: 770387656}
+  - {fileID: 726863058}
+  - {fileID: 135887615}
+  - {fileID: 1241590754}
+  corredores:
+  - {fileID: 1979461465}
+  - {fileID: 1053396616}
+  - {fileID: 338897109}
+  - {fileID: 782867946}
+  miControladorUI: {fileID: 639193866}
+  cantidadVueltas: 3
 --- !u!1 &252291703
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +874,7 @@ MonoBehaviour:
   target: {fileID: 135887615}
   speed: 0
   textoVisual: {fileID: 1643126950}
+  miControlador: {fileID: 241084634}
 --- !u!1 &399110634
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,8 +911,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.003, y: 0.75}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -0.008, y: 0.75}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &399110636
 MonoBehaviour:
@@ -1075,6 +1113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 639193865}
+  - component: {fileID: 639193866}
   m_Layer: 0
   m_Name: ControladorUI
   m_TagString: Untagged
@@ -1097,6 +1136,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &639193866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639193864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df7ec0bebb59d8f1a40a0d0dacc3381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControladorUI
+  controladorPosta: {fileID: 241084634}
+  textoFinal: {fileID: 1125288491}
+  sliderVelocidad: {fileID: 683004283}
 --- !u!1 &649723685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,12 +1271,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 321633809}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 3
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 241084634}
+        m_TargetAssemblyTypeName: ControladorPosta, Assembly-CSharp
+        m_MethodName: ActualizarVelocidad
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &726863054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,8 +1397,8 @@ Transform:
   m_GameObject: {fileID: 726863054}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.25, y: 1, z: 4.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.25, y: 0.4, z: 4.25}
+  m_LocalScale: {x: 1, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1582,8 +1648,8 @@ Transform:
   m_GameObject: {fileID: 770387652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.25, y: 1, z: 4.23}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.25, y: 0.4, z: 4.23}
+  m_LocalScale: {x: 1, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1738,7 +1804,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.032, y: 0.75}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &774693311
 MonoBehaviour:
@@ -1932,6 +1998,7 @@ MonoBehaviour:
   target: {fileID: 1241590754}
   speed: 0
   textoVisual: {fileID: 1859484846}
+  miControlador: {fileID: 241084634}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2122,8 +2189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.01, y: 0.75}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: -0.013, y: 0.749}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1043603690
 MonoBehaviour:
@@ -2225,7 +2292,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -3.01, y: 0.75}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1047023763
 MonoBehaviour:
@@ -2419,6 +2486,7 @@ MonoBehaviour:
   target: {fileID: 726863058}
   speed: 0
   textoVisual: {fileID: 1801046218}
+  miControlador: {fileID: 241084634}
 --- !u!1 &1100762808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2739,8 +2807,8 @@ Transform:
   m_GameObject: {fileID: 1241590750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.25, y: 1, z: -4.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.25, y: 0.4, z: -4.25}
+  m_LocalScale: {x: 1, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2779,8 +2847,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -28, y: 0.001461029}
-  m_SizeDelta: {x: 0.0005931854, y: -0.0046653748}
+  m_AnchoredPosition: {x: -22.050009, y: 0.25614077}
+  m_SizeDelta: {x: 11.900576, y: -0.49238384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643126950
 MonoBehaviour:
@@ -2868,7 +2936,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 33.66522, y: -6.119049, z: 7.5895767, w: 0.0037671912}
+  m_margin: {x: 29.770159, y: -0.67786014, z: -34.086742, w: 0.0037671912}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2916,8 +2984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -28, y: 0.001461029}
-  m_SizeDelta: {x: 0.0005931854, y: -0.0046653748}
+  m_AnchoredPosition: {x: -22.050009, y: -0.54385924}
+  m_SizeDelta: {x: 11.900576, y: 1.1076162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1801046218
 MonoBehaviour:
@@ -3005,7 +3073,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 33.66522, y: -6.119049, z: 7.5895767, w: 0.0037671912}
+  m_margin: {x: 28.637625, y: -0.108146675, z: -28.134186, w: 0.0037671912}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3132,8 +3200,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 276.9, y: 0.001461029}
-  m_SizeDelta: {x: 0.0005931854, y: -0.0046653748}
+  m_AnchoredPosition: {x: 311.3, y: 0.0068712234}
+  m_SizeDelta: {x: 0.0005931854, y: 0.0061551332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1859484846
 MonoBehaviour:
@@ -3221,7 +3289,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 33.66522, y: -6.119049, z: 7.5895767, w: 0.0037671912}
+  m_margin: {x: -2.8828058, y: -6.119049, z: -4.5716915, w: 0.0037671912}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3317,7 +3385,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1900931207}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 639193866}
+        m_TargetAssemblyTypeName: ControladorUI, Assembly-CSharp
+        m_MethodName: BotonCorrer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1900931207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3485,6 +3565,7 @@ MonoBehaviour:
   target: {fileID: 770387656}
   speed: 0
   textoVisual: {fileID: 2002519737}
+  miControlador: {fileID: 241084634}
 --- !u!1 &2002519735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,8 +3600,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -28, y: 0.001461029}
-  m_SizeDelta: {x: 0.0005931854, y: -0.0046653748}
+  m_AnchoredPosition: {x: -16.102121, y: 0.008470535}
+  m_SizeDelta: {x: 0.004811287, y: 0.0029566288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2002519737
 MonoBehaviour:
@@ -3608,7 +3689,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 33.66522, y: -6.119049, z: 7.5895767, w: 0.0037671912}
+  m_margin: {x: 14.569612, y: 0.1063347, z: -15.406574, w: 0.0037671912}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

@@ -11,48 +11,101 @@ public class ControladorPosta : MonoBehaviour
     private int contadorVueltas = 0;
     private int corredorActual = 0;
     private float velocidadCarrera = 0f;
+    private bool carreraIniciada = false;
+
     public void IniciarCarrera(float velocidadSlider)
     {
         velocidadCarrera = velocidadSlider;
         contadorVueltas = 0;
         corredorActual = 0;
-        corredores [corredorActual].Correr(velocidadCarrera);
+        carreraIniciada = true;
+
+        Debug.Log("CARRERA INICIADA - Objetivo: " + cantidadVueltas + " vueltas.");
+
+        if (miControladorUI != null)
+        {
+            miControladorUI.OcultarFinalizacion();
+        }
+
+        // Resetear todos a sus posiciones antes de empezar
+        foreach (Corredor c in corredores)
+        {
+            c.VolverInicio();
+        }
+
+        LanzarSiguienteCorredor();
     }
 
-    public void Resetear()
+    public void ActualizarVelocidad(float nuevaVelocidad)
     {
-        contadorVueltas = 0;
-        corredorActual = 0;
-        foreach (Corredor corredor in corredores)
+        velocidadCarrera = nuevaVelocidad;
+        if (carreraIniciada && corredorActual < corredores.Count)
         {
-            corredor.VolverInicio();
+            corredores[corredorActual].CambiarVelocidad(velocidadCarrera);
         }
     }
 
     public void ReportarLlegada()
     {
-        corredorActual++; // El corredor que llegó le cede el turno al siguiente
+        Debug.Log("Corredor " + corredorActual + " llegó a su meta.");
+        corredorActual++;
 
-        // Si el índice llega al final de la lista, reiniciamos el ciclo
+        // ¿Completaron todos el ciclo? = una vuelta
         if (corredorActual >= corredores.Count)
         {
             corredorActual = 0;
-            contadorVueltas++; // Se completó una vuelta de todo el equipo
+            contadorVueltas++;
+            Debug.Log("VUELTA COMPLETADA: " + contadorVueltas + " / " + cantidadVueltas);
+
+            if (contadorVueltas < cantidadVueltas)
+            {
+                // Faltan vueltas: resetear todos a posición inicial y empezar de nuevo
+                Debug.Log("Reseteando posiciones para la siguiente vuelta...");
+                foreach (Corredor c in corredores)
+                {
+                    c.VolverInicio();
+                }
+            }
         }
 
-        // --- RESPONSABILIDAD: Controlar las vueltas y comunicar ---
         if (contadorVueltas < cantidadVueltas)
         {
-            // Todavía faltan vueltas, arranca el siguiente
-            corredores[corredorActual].Correr(velocidadCarrera);
+            LanzarSiguienteCorredor();
         }
         else
         {
-            // Se cumplieron las vueltas: avisar al controlador UI
-            if(miControladorUI != null)
+            Debug.Log("CARRERA FINALIZADA. Se cumplieron las " + cantidadVueltas + " vueltas.");
+            carreraIniciada = false;
+            if (miControladorUI != null)
             {
                 miControladorUI.MostrarFinalizacion();
             }
         }
+    }
+
+    private void LanzarSiguienteCorredor()
+    {
+        if (corredorActual < corredores.Count && corredorActual < objetivos.Count)
+        {
+            Debug.Log("Lanzando corredor " + corredorActual + " hacia objetivo " + corredorActual);
+            corredores[corredorActual].Correr(velocidadCarrera, objetivos[corredorActual]);
+        }
+    }
+
+    public void Resetear()
+    {
+        carreraIniciada = false;
+        contadorVueltas = 0;
+        corredorActual = 0;
+        foreach (Corredor c in corredores)
+        {
+            c.VolverInicio();
+        }
+        
+        if (miControladorUI != null)
+        {
+            miControladorUI.OcultarFinalizacion();
+        }
+        Debug.Log("Sistema Reseteado.");
     }
 }
