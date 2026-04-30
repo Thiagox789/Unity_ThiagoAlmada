@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class ControladorPosta : MonoBehaviour
 {
@@ -12,6 +11,15 @@ public class ControladorPosta : MonoBehaviour
     private int CorredorActual = 0;
     private bool carreraInicializada = false;
 
+    public void PosicionarTodos()
+    {
+        VueltasRealizadas = 0;
+        CorredorActual = 0;
+        carreraInicializada = false;
 
-    public void 
+        for (int i = 0; i < corredores.Count; i++)
+        {
+            corredores[i].PosicionarCorredores();
+        }
+    }
 }
