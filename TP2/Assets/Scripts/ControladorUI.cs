@@ -35,7 +35,8 @@ public class ControladorUI : MonoBehaviour
     {
         if (controladorPosta != null)
         {
-            controladorPosta.Resetear();
+            controladorPosta.PosicionarTodos(); // Nombre corregido
+            OcultarFinalizacion();             // Limpiar el texto
         }
     }
 
