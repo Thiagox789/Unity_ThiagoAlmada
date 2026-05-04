@@ -872,9 +872,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corredor
   target: {fileID: 135887615}
+  controladorposta: {fileID: 241084634}
+  Contador_Pasos_Texto: {fileID: 1643126950}
   speed: 0
-  textoVisual: {fileID: 1643126950}
-  miControlador: {fileID: 241084634}
 --- !u!1 &399110634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,9 +1996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corredor
   target: {fileID: 1241590754}
+  controladorposta: {fileID: 241084634}
+  Contador_Pasos_Texto: {fileID: 1859484846}
   speed: 0
-  textoVisual: {fileID: 1859484846}
-  miControlador: {fileID: 241084634}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,9 +2484,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corredor
   target: {fileID: 726863058}
+  controladorposta: {fileID: 241084634}
+  Contador_Pasos_Texto: {fileID: 1801046218}
   speed: 0
-  textoVisual: {fileID: 1801046218}
-  miControlador: {fileID: 241084634}
 --- !u!1 &1100762808
 GameObject:
   m_ObjectHideFlags: 0
@@ -3563,9 +3563,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corredor
   target: {fileID: 770387656}
+  controladorposta: {fileID: 241084634}
+  Contador_Pasos_Texto: {fileID: 2002519737}
   speed: 0
-  textoVisual: {fileID: 2002519737}
-  miControlador: {fileID: 241084634}
 --- !u!1 &2002519735
 GameObject:
   m_ObjectHideFlags: 0
