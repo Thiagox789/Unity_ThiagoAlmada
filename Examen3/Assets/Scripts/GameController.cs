@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public UIController componenteUI; 
     public Slider sliderDificultad;   
-
+    public PelotaFisica pelota; 
     public float tiempoDeJuego = 30f;
     public int puntosParaGanar = 3;
     private int puntosActuales = 0;
@@ -46,6 +46,12 @@ public class GameController : MonoBehaviour
         componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
     }
 
+    public float ObtenerDificultad()
+    {
+        if (sliderDificultad != null) return sliderDificultad.value;
+        return 0f;
+    }
+
     public void PresionarBotonPrincipal()
     {
         if (juegoTerminado)
@@ -56,12 +62,26 @@ public class GameController : MonoBehaviour
 
         if (!juegoEmpezado)
         {
-            juegoEmpezado = true;
-            if (sliderDificultad != null)
+            ActivarInicioJuego();
+        }
+        else
+        {
+            if (pelota != null)
             {
-                sliderDificultad.interactable = false;
+                pelota.LanzarDesdeBoton();
+            }
+            else
+            {
+                Debug.LogWarning("Falta asignar el objeto Pelota en el GameController.");
             }
         }
+    }
+
+    public void SumarPuntoReal()
+    {
+        if (juegoTerminado) return;
+
+        ActivarInicioJuego();
 
         puntosActuales++;
         componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
@@ -69,6 +89,22 @@ public class GameController : MonoBehaviour
         if (puntosActuales >= puntosParaGanar)
         {
             componenteUI.CambiarColorMarcador(Color.green);
+        }
+    }
+
+    private void ActivarInicioJuego()
+    {
+        if (!juegoEmpezado)
+        {
+            juegoEmpezado = true;
+            if (sliderDificultad != null)
+            {
+                sliderDificultad.interactable = false;
+            }
+            if (componenteUI != null && componenteUI.textoBoton != null)
+            {
+                componenteUI.textoBoton.text = "Lanzar";
+            }
         }
     }
 
