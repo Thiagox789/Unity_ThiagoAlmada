@@ -202,9 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1510066636}
-        m_TargetAssemblyTypeName: PelotaFisica, Assembly-CSharp
-        m_MethodName: LanzarDesdeBoton
+      - m_Target: {fileID: 1940560143}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: PresionarBotonPrincipal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -767,7 +767,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 3.5, z: 1}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &494460611
 SpriteRenderer:
@@ -856,8 +856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DetectorAro
   controladorJuego: {fileID: 1940560143}
-  velocidad: 2
-  amplitud: 3
+  velocidad: 1
+  amplitud: 6
 --- !u!54 &494460614
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1709,9 +1709,9 @@ RectTransform:
   - {fileID: 1133134284}
   - {fileID: 434699508}
   - {fileID: 1504317851}
-  - {fileID: 227895923}
   - {fileID: 1072469235}
   - {fileID: 1545748722}
+  - {fileID: 227895923}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2101,6 +2101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c203d17110b0bb954b21ee2d7f47cfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PelotaFisica
+  gameController: {fileID: 1940560143}
   velocidadHaciaAdelante: 4
   velocidadHaciaArriba: 13
   gravedadSimulada: 10
@@ -2397,8 +2398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   componenteUI: {fileID: 598706237}
+  controladorSonido: {fileID: 0}
   sliderDificultad: {fileID: 2083892549}
-  pelota: {fileID: 0}
+  pelota: {fileID: 1510066636}
   tiempoDeJuego: 30
   puntosParaGanar: 3
 --- !u!1 &2018900301
