@@ -19,14 +19,18 @@ public class GameController : MonoBehaviour
     void Start()
     {
         if (sliderDificultad != null)
+        {
             ActualizarReglasPorSlider(sliderDificultad.value);
+        }
     }
 
     void Update()
     {
-        if (!juegoEmpezado || juegoTerminado) return;
+        if (juegoEmpezado == false) return;
+        if (juegoTerminado == true) return;
 
-        tiempoDeJuego -= Time.deltaTime;
+        tiempoDeJuego = tiempoDeJuego - Time.deltaTime;
+        
         componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
 
         if (tiempoDeJuego <= 0)
@@ -38,65 +42,105 @@ public class GameController : MonoBehaviour
 
     public void ActualizarReglasPorSlider(float valorSlider)
     {
-        if (juegoEmpezado) return;
+        if (juegoEmpezado == true) return;
         
-        puntosParaGanar = 3 + Mathf.RoundToInt(valorSlider * 5f); 
+        puntosParaGanar = 5 + Mathf.RoundToInt(valorSlider * 5f); 
         componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
     }
 
-    public float ObtenerDificultad() => sliderDificultad != null ? sliderDificultad.value : 0f;
+    public float ObtenerDificultad()
+    {
+        if (sliderDificultad != null)
+        {
+            return sliderDificultad.value;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
 
     public void PresionarBotonPrincipal()
     {
-        if (juegoTerminado)
+        if (juegoTerminado == true)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             return;
         }
 
-        if (!juegoEmpezado)
+        if (juegoEmpezado == false)
         {
             juegoEmpezado = true;
-            if (sliderDificultad != null) sliderDificultad.interactable = false;
-            if (componenteUI != null && componenteUI.textoBoton != null) 
+            
+            if (sliderDificultad != null)
+            {
+                sliderDificultad.interactable = false; 
+            }
+            
+            if (componenteUI != null && componenteUI.textoBoton != null)
+            {
                 componenteUI.textoBoton.text = "Lanzar";
+            }
         }
-        else if (pelota != null)
+        else 
         {
-            pelota.LanzarDesdeBoton();
+            if (pelota != null)
+            {
+                pelota.LanzarDesdeBoton();
+            }
         }
     }
 
     public void RegistrarAcierto()
     {
-        if (juegoTerminado) return;
+        if (juegoTerminado == true) return;
         
-        controladorSonido?.ReproducirAcierto();
-        puntosActuales++;
+        if (controladorSonido != null)
+        {
+            controladorSonido.ReproducirAcierto();
+        }
+
+        puntosActuales = puntosActuales + 1;
         componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
 
         if (puntosActuales >= puntosParaGanar)
         {
             componenteUI.CambiarColorMarcador(Color.green);
-            EvaluarFinDePartida(); 
         }
     }
 
     public void RegistrarFallo()
     {
-        if (!juegoTerminado) controladorSonido?.ReproducirFallo();
+        if (juegoTerminado == false)
+        {
+            if (controladorSonido != null)
+            {
+                controladorSonido.ReproducirFallo();
+            }
+        }
     }
 
     private void EvaluarFinDePartida()
     {
-        if (juegoTerminado) return; 
+        if (juegoTerminado == true) return; 
 
         juegoTerminado = true;
-        bool gano = puntosActuales >= puntosParaGanar;
         
-        if (gano) controladorSonido?.ReproducirVictoria();
-        else controladorSonido?.ReproducirDerrota();
-
-        componenteUI.MostrarPantallaFinal(gano);
+        if (puntosActuales >= puntosParaGanar)
+        {
+            if (controladorSonido != null)
+            {
+                controladorSonido.ReproducirVictoria();
+            }
+            componenteUI.MostrarPantallaFinal(true);
+        }
+        else
+        {
+            if (controladorSonido != null)
+            {
+                controladorSonido.ReproducirDerrota();
+            }
+            componenteUI.MostrarPantallaFinal(false);
+        }
     }
 }

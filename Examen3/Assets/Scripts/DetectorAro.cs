@@ -6,7 +6,8 @@ public class DetectorAro : MonoBehaviour
     
     [Header("Movimiento del Aro")]
     public float velocidad = 1f;
-    public float amplitud = 6f;
+    public float amplitud = 6f; 
+    
     private Vector3 posicionInicial;
 
     void Start()
@@ -16,10 +17,17 @@ public class DetectorAro : MonoBehaviour
 
     void Update()
     {
-        float dificultad = controladorJuego != null ? controladorJuego.ObtenerDificultad() : 0f;
-        float velocidadActual = velocidad + (dificultad * 5f); 
+        float dificultad = 0f;
+        if (controladorJuego != null)
+        {
+            dificultad = controladorJuego.ObtenerDificultad();
+        }
+
+        float velocidadActual = velocidad + (dificultad * 3f); 
         
-        float nuevoX = posicionInicial.x + Mathf.Sin(Time.time * velocidadActual) * amplitud;
+        float movimientoMatematico = Mathf.Sin(Time.time * velocidadActual);
+        float nuevoX = posicionInicial.x + (movimientoMatematico * amplitud);
+        
         transform.position = new Vector3(nuevoX, transform.position.y, transform.position.z);
     }
 }
