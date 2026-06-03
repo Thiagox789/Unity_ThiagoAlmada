@@ -17,14 +17,22 @@ public class DetectorAro : MonoBehaviour
 
     void Update()
     {
-        float dificultad = 0f;
+        float dificultad = 1f;
         if (controladorJuego != null)
         {
             dificultad = controladorJuego.ObtenerDificultad();
         }
 
-        float velocidadActual = velocidad + (dificultad * 3f); 
-        
+        int nivel = Mathf.RoundToInt(dificultad);
+        float velocidadActual = velocidad;
+        switch (nivel)
+        {
+            case 1: velocidadActual = 1.2f; break;
+            case 2: velocidadActual = 1.3f; break;
+            case 3: velocidadActual = 1.4f; break;
+            case 4: velocidadActual = 1.6f; break;
+            case 5: velocidadActual = 1.8f; break;
+        }       
         float movimientoMatematico = Mathf.Sin(Time.time * velocidadActual);
         float nuevoX = posicionInicial.x + (movimientoMatematico * amplitud);
         

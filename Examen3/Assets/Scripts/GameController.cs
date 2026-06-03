@@ -26,12 +26,14 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (juegoEmpezado == false) return;
-        if (juegoTerminado == true) return;
+        if (juegoEmpezado == false || juegoTerminado == true) return;
 
-        tiempoDeJuego = tiempoDeJuego - Time.deltaTime;
+        tiempoDeJuego -= Time.deltaTime;
         
-        componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
+        if (componenteUI != null)
+        {
+            componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
+        }
 
         if (tiempoDeJuego <= 0)
         {
@@ -43,9 +45,20 @@ public class GameController : MonoBehaviour
     public void ActualizarReglasPorSlider(float valorSlider)
     {
         if (juegoEmpezado == true) return;
-        
-        puntosParaGanar = 5 + Mathf.RoundToInt(valorSlider * 5f); 
-        componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
+        int nivelDificultad = Mathf.RoundToInt(valorSlider);
+
+        switch(nivelDificultad)
+        {
+            case 1: puntosParaGanar = 5; break;
+            case 2: puntosParaGanar = 7; break;
+            case 3: puntosParaGanar = 9; break;
+            case 4: puntosParaGanar = 12; break;
+            case 5: puntosParaGanar = 15; break;
+        }   
+        if (componenteUI != null)
+        {
+            componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
+        }
     }
 
     public float ObtenerDificultad()
@@ -54,10 +67,7 @@ public class GameController : MonoBehaviour
         {
             return sliderDificultad.value;
         }
-        else
-        {
-            return 0f;
-        }
+        return 0f;
     }
 
     public void PresionarBotonPrincipal()
@@ -71,23 +81,12 @@ public class GameController : MonoBehaviour
         if (juegoEmpezado == false)
         {
             juegoEmpezado = true;
-            
-            if (sliderDificultad != null)
-            {
-                sliderDificultad.interactable = false; 
-            }
-            
-            if (componenteUI != null && componenteUI.textoBoton != null)
-            {
-                componenteUI.textoBoton.text = "Lanzar";
-            }
+            if (sliderDificultad != null) sliderDificultad.interactable = false; 
+            if (componenteUI != null && componenteUI.textoBoton != null) componenteUI.textoBoton.text = "Lanzar";
         }
         else 
         {
-            if (pelota != null)
-            {
-                pelota.LanzarDesdeBoton();
-            }
+            if (pelota != null) pelota.LanzarDesdeBoton();
         }
     }
 
@@ -95,17 +94,16 @@ public class GameController : MonoBehaviour
     {
         if (juegoTerminado == true) return;
         
-        if (controladorSonido != null)
+        if (controladorSonido != null) controladorSonido.ReproducirAcierto();
+        puntosActuales++;
+        
+        if (componenteUI != null)
         {
-            controladorSonido.ReproducirAcierto();
-        }
-
-        puntosActuales = puntosActuales + 1;
-        componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
-
-        if (puntosActuales >= puntosParaGanar)
-        {
-            componenteUI.CambiarColorMarcador(Color.green);
+            componenteUI.MostrarDatosEnPantalla(tiempoDeJuego, puntosActuales, puntosParaGanar);
+            if (puntosActuales >= puntosParaGanar)
+            {
+                componenteUI.CambiarColorMarcador(Color.green);
+            }
         }
     }
 
@@ -113,34 +111,25 @@ public class GameController : MonoBehaviour
     {
         if (juegoTerminado == false)
         {
-            if (controladorSonido != null)
-            {
-                controladorSonido.ReproducirFallo();
-            }
+            if (controladorSonido != null) controladorSonido.ReproducirFallo();
         }
     }
 
     private void EvaluarFinDePartida()
     {
         if (juegoTerminado == true) return; 
-
+        
         juegoTerminado = true;
         
         if (puntosActuales >= puntosParaGanar)
         {
-            if (controladorSonido != null)
-            {
-                controladorSonido.ReproducirVictoria();
-            }
-            componenteUI.MostrarPantallaFinal(true);
+            if (controladorSonido != null) controladorSonido.ReproducirVictoria();
+            if (componenteUI != null) componenteUI.MostrarPantallaFinal(true);
         }
         else
         {
-            if (controladorSonido != null)
-            {
-                controladorSonido.ReproducirDerrota();
-            }
-            componenteUI.MostrarPantallaFinal(false);
+            if (controladorSonido != null) controladorSonido.ReproducirDerrota();
+            if (componenteUI != null) componenteUI.MostrarPantallaFinal(false);
         }
     }
 }

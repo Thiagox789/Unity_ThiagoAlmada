@@ -767,7 +767,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 1}
+  m_Size: {x: 0.5, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &494460611
 SpriteRenderer:
@@ -894,6 +894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 562107101}
+  - component: {fileID: 562107102}
   m_Layer: 0
   m_Name: SoundController
   m_TagString: Untagged
@@ -916,6 +917,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &562107102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562107100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc49db065e4af02919ecc598cd7d6ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundController
+  sourceEfectos: {fileID: 0}
+  sourceMusica: {fileID: 0}
+  clipAcierto: {fileID: 0}
+  clipFallo: {fileID: 0}
+  clipVictoria: {fileID: 0}
+  clipDerrota: {fileID: 0}
 --- !u!1 &598706236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,7 +2124,6 @@ MonoBehaviour:
   velocidadHaciaAdelante: 4
   velocidadHaciaArriba: 13
   gravedadSimulada: 10
-  alturaMaximaDelAro: 5
 --- !u!1 &1545748721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,10 +2584,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 736818506}
   m_HandleRect: {fileID: 384527752}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0
+  m_MinValue: 1
+  m_MaxValue: 5
+  m_WholeNumbers: 1
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
