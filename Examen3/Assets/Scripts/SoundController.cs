@@ -3,8 +3,7 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     [Header("Audio Sources")]
-    public AudioSource sourceEfectos;
-    public AudioSource sourceMusica;
+    public AudioSource sourceSonidos;
 
     [Header("Audio Clips")]
     public AudioClip clipAcierto;
@@ -14,31 +13,31 @@ public class SoundController : MonoBehaviour
 
     public void ReproducirAcierto()
     {
-        if (sourceEfectos != null && clipAcierto != null)
-            sourceEfectos.PlayOneShot(clipAcierto);
+        if (sourceSonidos != null && clipAcierto != null)
+            sourceSonidos.PlayOneShot(clipAcierto);
     }
 
     public void ReproducirFallo()
     {
-        if (sourceEfectos != null && clipFallo != null)
-            sourceEfectos.PlayOneShot(clipFallo);
+        if (sourceSonidos != null && clipFallo != null)
+            sourceSonidos.PlayOneShot(clipFallo);
     }
 
     public void ReproducirVictoria()
     {
-        if (sourceMusica != null && clipVictoria != null)
+        if (sourceSonidos != null && clipVictoria != null)
         {
-            sourceMusica.clip = clipVictoria;
-            sourceMusica.Play();
+            sourceSonidos.clip = clipVictoria;
+            sourceSonidos.Play();
         }
     }
 
     public void ReproducirDerrota()
     {
-        if (sourceMusica != null && clipDerrota != null)
+        if (sourceSonidos != null && clipDerrota != null)
         {
-            sourceMusica.clip = clipDerrota;
-            sourceMusica.Play();
+            sourceSonidos.clip = clipDerrota;
+            sourceSonidos.Play();
         }
     }
 }

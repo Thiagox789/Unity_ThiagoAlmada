@@ -31,7 +31,7 @@ public class PelotaFisica : MonoBehaviour
         }
     }
 
-    public void LanzarDesdeBoton()
+    public void LanzarPelota()
     {
         if (seLanzo == true) return;
 

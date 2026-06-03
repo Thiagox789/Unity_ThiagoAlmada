@@ -930,8 +930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc49db065e4af02919ecc598cd7d6ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundController
-  sourceEfectos: {fileID: 562107103}
-  sourceMusica: {fileID: 562107103}
+  sourceSonidos: {fileID: 562107103}
   clipAcierto: {fileID: 8300000, guid: 0513611f7c4c7a901ab8af59f27f8deb, type: 3}
   clipFallo: {fileID: 8300000, guid: 3a2cad6c48896e2bfbe2d33a26e42a4a, type: 3}
   clipVictoria: {fileID: 8300000, guid: da9bbd46d97d09d70b8004a633fb6acf, type: 3}

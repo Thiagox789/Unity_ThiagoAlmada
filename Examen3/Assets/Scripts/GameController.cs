@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour
         }
         else 
         {
-            if (pelota != null) pelota.LanzarDesdeBoton();
+            if (pelota != null) pelota.LanzarPelota();
         }
     }
 
