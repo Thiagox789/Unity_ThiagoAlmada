@@ -2,42 +2,65 @@ using UnityEngine;
 
 public class SoundController : MonoBehaviour
 {
-    [Header("Audio Sources")]
-    public AudioSource sourceSonidos;
+    public AudioSource sourceMusica;
+    public AudioSource sourceEfectos; 
 
-    [Header("Audio Clips")]
     public AudioClip clipAcierto;
     public AudioClip clipFallo;
     public AudioClip clipVictoria;
     public AudioClip clipDerrota;
+    
+    public DatosVolumen datosVolumen;
+
+    void Start()
+    {
+        ActualizarVolumen();
+    }
+
+    public void ActualizarVolumen()
+    {
+        if (datosVolumen != null)
+        {
+            if (sourceMusica != null) sourceMusica.volume = datosVolumen.volumen;
+            if (sourceEfectos != null) sourceEfectos.volume = datosVolumen.volumen;
+        }
+    }
 
     public void ReproducirAcierto()
     {
-        if (sourceSonidos != null && clipAcierto != null)
-            sourceSonidos.PlayOneShot(clipAcierto);
+        ActualizarVolumen();
+        if (sourceEfectos != null && clipAcierto != null)
+        {
+            sourceEfectos.PlayOneShot(clipAcierto);
+        }
     }
 
     public void ReproducirFallo()
     {
-        if (sourceSonidos != null && clipFallo != null)
-            sourceSonidos.PlayOneShot(clipFallo);
+        ActualizarVolumen();
+        if (sourceEfectos != null && clipFallo != null)
+        {
+            sourceEfectos.PlayOneShot(clipFallo);
+        }
     }
 
     public void ReproducirVictoria()
     {
-        if (sourceSonidos != null && clipVictoria != null)
+        ActualizarVolumen();
+        if (sourceMusica != null && clipVictoria != null)
         {
-            sourceSonidos.clip = clipVictoria;
-            sourceSonidos.Play();
+            sourceMusica.clip = clipVictoria;
+            sourceMusica.Play();
         }
     }
 
     public void ReproducirDerrota()
     {
-        if (sourceSonidos != null && clipDerrota != null)
+        ActualizarVolumen();
+        if (sourceMusica != null && clipDerrota != null)
         {
-            sourceSonidos.clip = clipDerrota;
-            sourceSonidos.Play();
+            sourceMusica.clip = clipDerrota;
+            sourceMusica.Play();
         }
     }
 }
